@@ -1,7 +1,51 @@
 <section>
     <mat-card>
         <mat-card-content>
-            Tabla
+            <div style="overflow-x: auto">
+                <h2>Mis Empleados</h2>
+                <div style="text-align: left;">
+                    <mat-form-field style="width: 60%">
+                        <input matInput (keyup)="applyObjectFilter($any($event.target).value)"
+                            placeholder="Busca por cualquier campo" style="width: 100%; color: #000000" />
+                        <mat-icon matSuffix>search</mat-icon>
+                    </mat-form-field>
+                    <button>Hola</button>
+                </div>
+                <table mat-table [dataSource]="employeeDataSource" matSort>
+                    <!-- ID Column -->
+                    <ng-container matColumnDef="name_jobTitle">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre (Cargo) </th>
+                        <td mat-cell *matCellDef="let employee"> {{employee.name}}<br /> {{ employee.jobTitle }} </td>
+                    </ng-container>
+                    <!-- Progress Column -->
+                    <ng-container matColumnDef="dateOfBirth">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Edad </th>
+                        <td mat-cell *matCellDef="let employee"> {{employee.dateOfBirth}} </td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="hiringDate">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Contratación </th>
+                        <td mat-cell *matCellDef="let employee"> {{employee.hiringDate}} </td>
+                    </ng-container>
+
+                    <!-- Fruit Column -->
+                    <ng-container matColumnDef="actions">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Acciones </th>
+                        <td mat-cell style="padding-left: 10px" *matCellDef="let employee">
+                            <!-- <button mat-mini-fab style="padding: 0px" color="warn"
+                                [disabled]="user.is_active == false ? true : false" aria-label="info icon"
+                                title="Bloquear Usuario" (click)="blockUser(user)">
+                                <mat-icon>block</mat-icon>
+                            </button> -->
+                        </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </div>
+            <mat-paginator [length]="employee.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]">
+            </mat-paginator>
         </mat-card-content>
     </mat-card>
 </section>
