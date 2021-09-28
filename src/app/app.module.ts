@@ -13,12 +13,19 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from './view/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    DashboardComponent
+    DashboardComponent,
+    ConfirmationDialogComponent
+  ],
+  entryComponents: [
+    ConfirmationDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,6 +38,8 @@ import { MatSortModule } from '@angular/material/sort';
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    MatButtonModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

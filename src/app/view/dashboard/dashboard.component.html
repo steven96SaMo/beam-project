@@ -1,16 +1,18 @@
 <section>
     <mat-card>
         <mat-card-content>
+            <h2>Mis Empleados</h2>
+            <div style="text-align: left;">
+                <mat-form-field style="width: 65%; margin-right: 20px;">
+                    <input matInput (keyup)="applyObjectFilter($any($event.target).value)"
+                        placeholder="Busca por cualquier campo" style="width: 100%; color: #000000" />
+                    <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+                <button mat-raised-button class="addButton" (onClick)="createEmployee()">
+                    <mat-icon>add</mat-icon> Crear nuevo empleado
+                </button>
+            </div>
             <div style="overflow-x: auto">
-                <h2>Mis Empleados</h2>
-                <div style="text-align: left;">
-                    <mat-form-field style="width: 60%">
-                        <input matInput (keyup)="applyObjectFilter($any($event.target).value)"
-                            placeholder="Busca por cualquier campo" style="width: 100%; color: #000000" />
-                        <mat-icon matSuffix>search</mat-icon>
-                    </mat-form-field>
-                    <button>Hola</button>
-                </div>
                 <table mat-table [dataSource]="employeeDataSource" matSort>
                     <!-- ID Column -->
                     <ng-container matColumnDef="name_jobTitle">
@@ -30,14 +32,21 @@
                     </ng-container>
 
                     <!-- Fruit Column -->
-                    <ng-container matColumnDef="actions">
+                    <ng-container matColumnDef="actions" stickyEnd>
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Acciones </th>
                         <td mat-cell style="padding-left: 10px" *matCellDef="let employee">
-                            <!-- <button mat-mini-fab style="padding: 0px" color="warn"
-                                [disabled]="user.is_active == false ? true : false" aria-label="info icon"
-                                title="Bloquear Usuario" (click)="blockUser(user)">
-                                <mat-icon>block</mat-icon>
-                            </button> -->
+                            <button mat-icon-button color="primary" title="Editar el empleado"
+                                style="margin-right: 5px;" (click)="editEmployee(employee)">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                            <button mat-icon-button color="accent" title="Ver información del empleado"
+                                style="margin-right: 5px;" (click)="viewEmployee(employee)">
+                                <mat-icon>remove_red_eye</mat-icon>
+                            </button>
+                            <button mat-icon-button color="warn" title="Eliminar empleado" style="margin-right: 5px;"
+                                (click)="deleteEmployee(employee)">
+                                <mat-icon>delete_forever</mat-icon>
+                            </button>
                         </td>
                     </ng-container>
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

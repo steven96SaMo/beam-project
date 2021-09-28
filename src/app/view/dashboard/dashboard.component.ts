@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Employee } from 'src/app/model/employee';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -40,7 +42,9 @@ export class DashboardComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
-  constructor() { }
+  constructor(
+    public dialog: MatDialog,
+  ) { }
 
   ngOnInit(): void {
     this.getUserData()
@@ -95,4 +99,31 @@ export class DashboardComponent implements OnInit {
     filterValue = filterValue.toLowerCase() // MatTableDataSource defaults to lowercase matches
     this.employeeDataSource.filter = filterValue
   }
+
+  createEmployee() {
+    console.log("CREAR")
+  }
+
+  editEmployee(employee: Employee) {
+    console.log("EDITAR")
+  }
+
+  viewEmployee(employee: Employee) {
+    console.log("VER")
+  }
+
+  deleteEmployee(employee: Employee) {
+    console.log("BORRAR")
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: "350px",
+      data: "¿Estás seguro que quieres borrar este empleado?"
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+
+      }
+    })
+  }
+
 }
