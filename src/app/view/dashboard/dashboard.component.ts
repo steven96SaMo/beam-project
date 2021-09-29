@@ -3,7 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { Employee } from 'src/app/model/employee';
+import { EmployeeService } from 'src/app/service/employee.service';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
@@ -13,60 +15,35 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
 })
 export class DashboardComponent implements OnInit {
   displayedColumns: string[] = ['name_jobTitle', 'dateOfBirth', 'hiringDate', 'actions'];
-  employee: Employee[] = [
-    {
-      name: "hola",
-      dateOfBirth: "2021/09/11",
-      country: "Colombia",
-      userName: "Steven",
-      hiringDate: "2021/09/11",
-      state: "1",
-      area: "Tecnica",
-      jobTitle: "Desarrollador",
-      commission: "10%"
-    },
-    {
-      name: "hola",
-      dateOfBirth: "2021/09/11",
-      country: "Colombia",
-      userName: "Steven",
-      hiringDate: "2021/09/11",
-      state: "1",
-      area: "Tecnica",
-      jobTitle: "Desarrollador",
-      commission: "10%"
-    },
-  ]
+  employee: Employee[] = []
   employeeDataSource!: MatTableDataSource<Employee>;
 
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
   constructor(
+    private router: Router,
+    private employeeService: EmployeeService,
     public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
-    this.getUserData()
+    this.getEmployeeData()
   }
 
-  ngAfterViewInit() {
-    this.employeeDataSource.paginator = this.paginator;
-    this.employeeDataSource.sort = this.sort;
-  }
-
-  getUserData() {
-    /* this.viewUserService.getUsers().subscribe(
+  getEmployeeData() {
+    this.employeeService.getAllEmployees().subscribe(
       p => {
         console.log(p)
-        this.user = p.results !== undefined ? p.results : []
+        this.employee = p.results !== undefined ? p.results : []
       },
-      e => { console.log(e), this.launchMessage(e) },
+      e => { console.log(e) },
       () => {
         this.setObjectDataSource()
+        this.employeeDataSource.paginator = this.paginator;
+        this.employeeDataSource.sort = this.sort;
       }
-    ) */
-    this.setObjectDataSource()
+    )
   }
 
   // set data on table
@@ -102,6 +79,7 @@ export class DashboardComponent implements OnInit {
 
   createEmployee() {
     console.log("CREAR")
+    this.router.navigate(["/create"])
   }
 
   editEmployee(employee: Employee) {
@@ -113,7 +91,6 @@ export class DashboardComponent implements OnInit {
   }
 
   deleteEmployee(employee: Employee) {
-    console.log("BORRAR")
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: "350px",
       data: "¿Estás seguro que quieres borrar este empleado?"
@@ -121,7 +98,15 @@ export class DashboardComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-
+        this.employeeService.deleteEmployee(employee).subscribe(
+          p => {
+            console.log(p)
+          },
+          e => { console.log(e) },
+          () => {
+            this.getEmployeeData()
+          }
+        )
       }
     })
   }
