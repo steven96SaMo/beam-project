@@ -2,7 +2,7 @@
     <mat-card>
         <mat-card-content>
             <h2>Nuevo Empleado</h2>
-            <div style="width: 100%; text-align: left; margin-bottom: 10px;">
+            <div style="width: 100%; text-align: left; margin-bottom: 20px;">
                 <button mat-raised-button class="backButton" (click)="back()">
                     <mat-icon>backspace</mat-icon> Volver
                 </button>
@@ -52,7 +52,7 @@
                     </mat-form-field>
                     <mat-slide-toggle [(ngModel)]="isChecked" formControlName="state">Estado</mat-slide-toggle>
                 </div>
-                <div style="width: 90%; margin: auto">
+                <div style="width: 90%; margin: auto; margin-top: 30px;">
                     <mat-label>Área </mat-label>
                     <mat-button-toggle-group formControlName="area" [(ngModel)]="valueArea" aria-label="Font Style">
                         <mat-button-toggle value="Administrativa">Administrativa</mat-button-toggle>

@@ -28,22 +28,36 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getEmployeeData()
+    this.getEmployeeData();
   }
 
   getEmployeeData() {
     this.employeeService.getAllEmployees().subscribe(
       p => {
-        console.log(p)
+        console.log(p);
         this.employee = p.results !== undefined ? p.results : []
+        this.calculateAge(this.employee);
       },
       e => { console.log(e) },
       () => {
-        this.setObjectDataSource()
+        this.setObjectDataSource();
         this.employeeDataSource.paginator = this.paginator;
         this.employeeDataSource.sort = this.sort;
       }
     )
+  }
+
+  calculateAge(employeeArr: Employee[]) {
+    employeeArr.map((item) => {
+      let today = new Date();
+      let birthday = new Date(item.dateOfBirth);
+      let age = today.getFullYear() - birthday.getFullYear();
+      let month = today.getMonth() - birthday.getMonth();
+      if (month < 0 || (month === 0 && today.getDate() < birthday.getDate())) {
+        age--;
+      }
+      item["age"] = age.toString();
+    })
   }
 
   // set data on table
