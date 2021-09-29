@@ -10,6 +10,12 @@ export class EmployeeService {
 
   constructor(private http: HttpClient) { }
 
+  getCountries(): Observable<any> {
+    return this.http.get(GlobalVariable.COUNTRIES_URL, {
+      headers: this.getHeadersNA(),
+    })
+  }
+
   getAllEmployees(): Observable<any> {
     return this.http.get(buildGetUrl(GlobalVariable.READ_ALL_EMPLOYEES), {
       headers: this.getHeadersNA(),

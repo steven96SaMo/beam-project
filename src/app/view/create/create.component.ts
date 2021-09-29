@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { EmployeeService } from 'src/app/service/employee.service';
 
 @Component({
   selector: 'app-create',
@@ -13,18 +14,33 @@ export class CreateComponent implements OnInit {
   isChecked = false;
   valueJobTitle = "";
   valueArea = "";
+  countries = [{ value: "", text: "" }]
 
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
+    private employeeService: EmployeeService,
   ) { }
 
   ngOnInit(): void {
+    this.loadCountries()
     this.initForms()
   }
 
   back() {
     this.router.navigate(["/"])
+  }
+
+  loadCountries() {
+    this.employeeService.getCountries().subscribe(
+      p => {
+        this.countries = p !== undefined ? p : []
+      },
+      e => { console.log(e) },
+      () => {
+        console.log(this.countries)
+      }
+    )
   }
 
   initForms() {

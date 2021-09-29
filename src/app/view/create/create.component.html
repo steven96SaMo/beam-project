@@ -28,9 +28,8 @@
                         <mat-label>País</mat-label>
                         <select matNativeControl formControlName="country" required>
                             <option value="" selected></option>
-                            <option value="saab">Saab</option>
-                            <option value="mercedes">Mercedes</option>
-                            <option value="audi">Audi</option>
+                            <option *ngFor="let country of countries" [value]="country.value">{{country.text}}
+                            </option>
                         </select>
                         <mat-error *ngIf="employeeForm.controls.country.invalid">{{ getErrorMessage("country")
                             }}
