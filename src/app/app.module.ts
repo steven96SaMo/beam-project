@@ -20,6 +20,12 @@ import { HttpClientModule } from "@angular/common/http";
 import { CreateComponent } from './view/create/create.component';
 import { UpdateComponent } from './view/update/update.component';
 import { ViewEmployeeComponent } from './view/view-employee/view-employee.component'
+import { FormsModule, ReactiveFormsModule } from "@angular/forms"
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -48,6 +54,13 @@ import { ViewEmployeeComponent } from './view/view-employee/view-employee.compon
     MatButtonModule,
     MatDialogModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    MatSlideToggleModule,
+    MatButtonToggleModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
