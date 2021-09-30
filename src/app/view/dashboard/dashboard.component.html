@@ -1,7 +1,7 @@
 <section>
     <mat-card>
         <mat-card-content>
-            <h2>Mis Empleados</h2>
+            <h2 class="title">Mis Empleados</h2>
             <div style="text-align: left;">
                 <mat-form-field style="width: 65%; margin-right: 20px;">
                     <input matInput (keyup)="applyObjectFilter($any($event.target).value)"
@@ -37,11 +37,11 @@
                         <td mat-cell style="padding-left: 10px" *matCellDef="let employee">
                             <button mat-icon-button color="primary" title="Editar el empleado"
                                 style="margin-right: 5px;" (click)="editEmployee(employee)">
-                                <mat-icon>edit</mat-icon>
+                                <mat-icon style="color: #6444B8;">edit</mat-icon>
                             </button>
                             <button mat-icon-button color="accent" title="Ver información del empleado"
                                 style="margin-right: 5px;" (click)="viewEmployee(employee)">
-                                <mat-icon>remove_red_eye</mat-icon>
+                                <mat-icon style="color: #CD76FF;">remove_red_eye</mat-icon>
                             </button>
                             <button mat-icon-button color="warn" title="Eliminar empleado" style="margin-right: 5px;"
                                 (click)="deleteEmployee(employee)">
