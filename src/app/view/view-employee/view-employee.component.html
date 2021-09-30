@@ -45,7 +45,7 @@
                     <mat-button-toggle value="Administrativa" [disabled]="true">Administrativa</mat-button-toggle>
                     <mat-button-toggle value="Tecnología" [disabled]="true">Tecnología</mat-button-toggle>
                 </mat-button-toggle-group>
-                <mat-form-field *ngIf="valueArea == 'Administrativa'">
+                <mat-form-field *ngIf="valueArea == 'Administrativa'" style="margin-top: 10px;">
                     <mat-label>Cargo</mat-label>
                     <select matNativeControl [(ngModel)]="valueJobTitle" [disabled]="true">
                         <option value="" selected></option>
@@ -53,7 +53,7 @@
                         <option value="Recursos Humanos">Recursos Humanos</option>
                     </select>
                 </mat-form-field>
-                <mat-form-field *ngIf="valueArea == 'Tecnología'">
+                <mat-form-field *ngIf="valueArea == 'Tecnología'" style="margin-top: 10px;">
                     <mat-label>Cargo</mat-label>
                     <select matNativeControl [(ngModel)]="valueJobTitle" [disabled]="true">
                         <option value="" selected></option>
