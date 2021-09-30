@@ -20,11 +20,11 @@ const routes: Routes = [
         component: CreateComponent
       },
       {
-        path: "update",
+        path: "update/:id",
         component: UpdateComponent
       },
       {
-        path: "view-employee",
+        path: "view-employee/:id",
         component: ViewEmployeeComponent
       },
     ]

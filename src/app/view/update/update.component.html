@@ -1,1 +1,97 @@
-<p>update works!</p>
+<section>
+    <mat-card>
+        <mat-card-content>
+            <h2>Actualizar Empleado</h2>
+            <div style="width: 100%; text-align: left; margin-bottom: 20px;">
+                <button mat-raised-button class="backButton" (click)="back()">
+                    <mat-icon>backspace</mat-icon> Volver
+                </button>
+            </div>
+            <form [formGroup]="employeeForm" (ngSubmit)="updateEmployee(employeeForm)">
+                <div style="width: 90%; margin: auto">
+                    <mat-form-field>
+                        <mat-label>Nombre</mat-label>
+                        <input matInput type="text" formControlName="name" required />
+                        <mat-error *ngIf="employeeForm.controls.name.invalid">{{ getErrorMessage("name") }}
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Fecha de nacimiento</mat-label>
+                        <input matInput [matDatepicker]="dp3" [disabled]="true" formControlName="dateOfBirth">
+                        <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                        <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+                        <mat-error *ngIf="employeeForm.controls.dateOfBirth.invalid">{{ getErrorMessage("dateOfBirth")
+                            }}
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>País</mat-label>
+                        <select matNativeControl formControlName="country" required>
+                            <option value="" selected></option>
+                            <option *ngFor="let country of countries" [value]="country.value">{{country.text}}
+                            </option>
+                        </select>
+                        <mat-error *ngIf="employeeForm.controls.country.invalid">{{ getErrorMessage("country")
+                            }}
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Nombre de usuario</mat-label>
+                        <input matInput type="text" formControlName="userName" required />
+                        <mat-error *ngIf="employeeForm.controls.userName.invalid">{{ getErrorMessage("userName") }}
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Fecha de contratación</mat-label>
+                        <input matInput [matDatepicker]="dp4" [disabled]="true" formControlName="hiringDate">
+                        <mat-datepicker-toggle matSuffix [for]="dp4"></mat-datepicker-toggle>
+                        <mat-datepicker #dp4 disabled="false"></mat-datepicker>
+                        <mat-error *ngIf="employeeForm.controls.hiringDate.invalid">{{ getErrorMessage("hiringDate")
+                            }}
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-slide-toggle [(ngModel)]="isChecked" formControlName="state">Estado</mat-slide-toggle>
+                </div>
+                <div style="width: 90%; margin: auto; margin-top: 30px;">
+                    <mat-label>Área </mat-label>
+                    <mat-button-toggle-group formControlName="area" [(ngModel)]="valueArea" aria-label="Font Style">
+                        <mat-button-toggle value="Administrativa">Administrativa</mat-button-toggle>
+                        <mat-button-toggle value="Tecnología">Tecnología</mat-button-toggle>
+                    </mat-button-toggle-group>
+                    <mat-form-field *ngIf="valueArea == 'Administrativa'">
+                        <mat-label>Cargo</mat-label>
+                        <select matNativeControl [(ngModel)]="valueJobTitle" formControlName="jobTitle" required>
+                            <option value="" selected></option>
+                            <option value="Fundador y CEO">Fundador y CEO</option>
+                            <option value="Recursos Humanos">Recursos Humanos</option>
+                        </select>
+                        <mat-error *ngIf="employeeForm.controls.jobTitle.invalid">{{ getErrorMessage("jobTitle")
+                            }}
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field *ngIf="valueArea == 'Tecnología'">
+                        <mat-label>Cargo</mat-label>
+                        <select matNativeControl [(ngModel)]="valueJobTitle" formControlName="jobTitle" required>
+                            <option value="" selected></option>
+                            <option value="Programador">Programador</option>
+                            <option value="Diseñador">Diseñador</option>
+                        </select>
+                        <mat-error *ngIf="employeeForm.controls.jobTitle.invalid">{{ getErrorMessage("jobTitle")
+                            }}
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field *ngIf="valueJobTitle == 'Fundador y CEO'">
+                        <mat-label>Comisión</mat-label>
+                        <input matInput type="number" formControlName="commission" required />
+                        <mat-error *ngIf="employeeForm.controls.commission.invalid">{{ getErrorMessage("commission") }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <br />
+                <button mat-raised-button color="primary" [disabled]="employeeForm.invalid">
+                    ACTUALIZAR
+                </button>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</section>

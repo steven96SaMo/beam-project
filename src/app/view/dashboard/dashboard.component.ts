@@ -16,10 +16,10 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
 export class DashboardComponent implements OnInit {
   displayedColumns: string[] = ['name_jobTitle', 'dateOfBirth', 'hiringDate', 'actions'];
   employee: Employee[] = []
-  employeeDataSource!: MatTableDataSource<Employee>;
+  employeeDataSource: MatTableDataSource<Employee>;
 
-  @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
-  @ViewChild(MatSort, { static: false }) sort!: MatSort;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   constructor(
     private router: Router,
@@ -92,16 +92,15 @@ export class DashboardComponent implements OnInit {
   }
 
   createEmployee() {
-    console.log("CREAR")
     this.router.navigate(["/create"])
   }
 
   editEmployee(employee: Employee) {
-    console.log("EDITAR")
+    this.router.navigate(["/update", employee.id])
   }
 
   viewEmployee(employee: Employee) {
-    console.log("VER")
+    this.router.navigate(["/view-employee", employee.id])
   }
 
   deleteEmployee(employee: Employee) {
