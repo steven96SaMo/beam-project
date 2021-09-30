@@ -79,6 +79,10 @@ export class DashboardComponent implements OnInit {
         data.hiringDate
           .trim()
           .toLocaleLowerCase()
+          .indexOf(filterValue.trim().toLocaleLowerCase()) >= 0 ||
+        data.age
+          .trim()
+          .toLocaleLowerCase()
           .indexOf(filterValue.trim().toLocaleLowerCase()) >= 0
       )
     }
